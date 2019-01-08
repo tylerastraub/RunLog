@@ -1,6 +1,7 @@
 package com.straub.runlog.data;
 
 import java.io.*;
+import java.util.HashMap;
 
 public class FileIO {
 
@@ -46,6 +47,39 @@ public class FileIO {
         }
 
         return fullFile;
+    }
+
+    public HashMap<String, String> createHashMapFromFile(String filePath,
+                                                         String seperator) {
+        HashMap<String, String> map = new HashMap<String, String>();
+
+        String currentLine;
+        BufferedReader br = null;
+        try{
+            br = new BufferedReader(new FileReader(filePath));
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try{
+            while ((currentLine = br.readLine()) != null)
+            {
+                String[] parts = currentLine.split(seperator, 2);
+                if (parts.length >= 2)
+                {
+                    String key = parts[0];
+                    String value = parts[1];
+                    map.put(key, value);
+                } else {
+                    System.out.println("line is not of valid key/value format: "
+                            + currentLine);
+                }
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        return map;
     }
 
     public void writeToFile(String filePath, String text){

@@ -15,8 +15,9 @@ public class FirstTimeWindow extends JFrame{
         super(title + " " + version);
 
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
+        setResizable(false);
         setLayout(new GridBagLayout());
+
         GridBagConstraints gbc = new GridBagConstraints();
 
         addWindowListener(new WindowAdapter() {
@@ -81,7 +82,7 @@ public class FirstTimeWindow extends JFrame{
     private void createDataFile(String user_name) {
         FileIO fileIO = new FileIO();
 
-        fileIO.writeToFile("res/data.txt", "USER_NAME: "
+        fileIO.writeToFile("res/data.txt", "USER_NAME:"
                 + user_name);
     }
 }
