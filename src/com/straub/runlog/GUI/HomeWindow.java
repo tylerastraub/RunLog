@@ -8,12 +8,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
 
-import static java.awt.Font.PLAIN;
-
 public class HomeWindow extends JFrame {
     public HomeWindow(String title, String version){
         super(title + " " + version);
-
 
         HashMap<String, String> userInfo = new HashMap<String, String>();
         readUserInfo(userInfo);
