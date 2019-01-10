@@ -28,7 +28,7 @@ public class FirstTimeWindow extends JFrame{
             }
         });
 
-        final JLabel name_text = new JLabel("Please enter your name:");
+        final JLabel name_text = new JLabel("Please enter your first name:");
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 0.5;

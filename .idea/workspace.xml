@@ -2,22 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e226fd4c-bb1d-4cbb-b84b-b92fa314e200" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/tylerstraub.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jdatepicker_1_3_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/straub/runlog/GUI/NewEntryWindow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/straub/runlog/tools/DateLabelFormatter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RunLog.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RunLog.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/GUI/FirstTimeWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/GUI/FirstTimeWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/GUI/FirstTimeWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/GUI/FirstTimeWindow$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/GUI/FirstTimeWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/GUI/FirstTimeWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/GUI/HomeWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/GUI/HomeWindow$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/GUI/HomeWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/GUI/HomeWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/data/FileIO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/data/FileIO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RunLog/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RunLog/data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/res/data.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/straub/runlog/GUI/HomeTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/straub/runlog/GUI/HomeTab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/straub/runlog/GUI/HomeWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/straub/runlog/GUI/HomeWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/GUI/NewEntryWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/GUI/NewEntryWindow$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/GUI/NewEntryWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RunLog/com/straub/runlog/GUI/NewEntryWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/straub/runlog/GUI/FirstTimeWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/straub/runlog/GUI/FirstTimeWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/straub/runlog/GUI/NewEntryWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/straub/runlog/GUI/NewEntryWindow.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,8 +46,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/straub/runlog/GUI/NewEntryWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+            <state relative-caret-position="197">
+              <caret line="149" column="79" selection-start-line="149" selection-start-column="79" selection-end-line="149" selection-end-column="79" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -77,8 +70,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/straub/runlog/GUI/FirstTimeWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="990">
-              <caret line="74" column="36" selection-start-line="74" selection-start-column="36" selection-end-line="74" selection-end-column="36" />
+            <state relative-caret-position="405">
+              <caret line="30" column="68" selection-start-line="30" selection-start-column="68" selection-end-line="30" selection-end-column="68" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -106,11 +99,11 @@
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/com/straub/runlog/data/File.java" />
         <option value="$PROJECT_DIR$/src/com/straub/runlog/Main.java" />
-        <option value="$PROJECT_DIR$/src/com/straub/runlog/GUI/FirstTimeWindow.java" />
         <option value="$PROJECT_DIR$/src/com/straub/runlog/data/FileIO.java" />
         <option value="$PROJECT_DIR$/src/com/straub/runlog/tools/DateLabelFormatter.java" />
         <option value="$PROJECT_DIR$/src/com/straub/runlog/GUI/HomeWindow.java" />
         <option value="$PROJECT_DIR$/src/com/straub/runlog/GUI/HomeTab.java" />
+        <option value="$PROJECT_DIR$/src/com/straub/runlog/GUI/FirstTimeWindow.java" />
         <option value="$PROJECT_DIR$/src/com/straub/runlog/GUI/NewEntryWindow.java" />
       </list>
     </option>
@@ -133,17 +126,6 @@
             <path>
               <item name="RunLog" type="b2602c69:ProjectViewProjectNode" />
               <item name="RunLog" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RunLog" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RunLog" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RunLog" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RunLog" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="jdatepicker-1.3.4.jar" type="ab9368bb:PsiFileNode" />
             </path>
             <path>
               <item name="RunLog" type="b2602c69:ProjectViewProjectNode" />
@@ -241,7 +223,7 @@
       <workItem from="1546967478192" duration="6262000" />
       <workItem from="1547011599324" duration="85000" />
       <workItem from="1547012401629" duration="4061000" />
-      <workItem from="1547058254220" duration="5152000" />
+      <workItem from="1547058254220" duration="12107000" />
     </task>
     <task id="LOCAL-00001" summary="added groundwork for tabs and now have more file IO options">
       <created>1546974902123</created>
@@ -254,7 +236,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29333000" />
+    <option name="totallyTimeSpent" value="36288000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="959" extended-state="0" />
@@ -267,7 +249,7 @@
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3298731" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34025374" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4993895" weight="0.34025374" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -276,7 +258,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50061053" side_tool="true" weight="0.34025374" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3298731" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -334,16 +316,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/straub/runlog/GUI/FirstTimeWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="74" column="36" selection-start-line="74" selection-start-column="36" selection-end-line="74" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-9.0.4.jdk/Contents/Home/lib/src.zip!/java.base/java/util/Calendar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
@@ -372,6 +344,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/straub/runlog/GUI/FirstTimeWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="30" column="68" selection-start-line="30" selection-start-column="68" selection-end-line="30" selection-end-column="68" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/straub/runlog/GUI/HomeTab.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -384,8 +366,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/straub/runlog/GUI/NewEntryWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+        <state relative-caret-position="197">
+          <caret line="149" column="79" selection-start-line="149" selection-start-column="79" selection-end-line="149" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
