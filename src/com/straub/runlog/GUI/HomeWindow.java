@@ -52,7 +52,6 @@ public class HomeWindow extends JFrame {
     }
 }
 
-// TODO: create general home environment. should figure out tab system for easy
-// switching between environments. general idea is that there will be a calendar,
-// a weekly logger, a stats page, and some other stuff. home page should have
-// all the tabs, a welcome message, and a brief weekly stats recap
+// TODO: general idea is that there will be a calendar, a weekly logger, a stats
+// page, and some other stuff. home page should have all the tabs, a welcome
+// message, and a brief weekly stats recap

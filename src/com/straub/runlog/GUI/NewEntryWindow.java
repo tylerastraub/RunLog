@@ -1,10 +1,10 @@
 package com.straub.runlog.GUI;
 
 import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Properties;
@@ -15,6 +15,9 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 public class NewEntryWindow extends JFrame {
+    // numOfEnteredFields starts equal to number of fields with default values
+    private int numOfEnteredFields = 1;
+
     public NewEntryWindow() {
         super("Add New Entry");
 
@@ -25,10 +28,11 @@ public class NewEntryWindow extends JFrame {
         setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.fill = GridBagConstraints.BOTH;
         gbc.weightx = 0.5;
         gbc.weighty = 0.5;
+
+        JPanel[] panels = new JPanel[7];
+        createPanels(panels, 7);
 
         String[] hours = new String[12];
         for(int i = 0; i < 12; i++) {
@@ -42,8 +46,8 @@ public class NewEntryWindow extends JFrame {
         minutes[0] = "00";
         minutes[1] = "05";
         String[] pmOrAm = {"AM", "PM"};
-
         String[] distanceUnits = {"Miles", "Kilometers", "Feet", "Meters"};
+        String[] runTypes = {"Run", "Long Run", "Workout", "Race"};
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -54,11 +58,8 @@ public class NewEntryWindow extends JFrame {
         });
 
         /****** DATE ******/
+
         final JLabel dateLabel = new JLabel("Date:");
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.insets = new Insets(5,5,5,5);
-        add(dateLabel, gbc);
 
         Properties p = new Properties();
         p.put("text.today", "Today");
@@ -71,43 +72,31 @@ public class NewEntryWindow extends JFrame {
 
         datePicker.setTextEditable(true);
         model.setSelected(true);
+        panels[0].add(datePicker);
 
+        gbc.gridx = 0;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        add(dateLabel, gbc);
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.gridx = 1;
-        gbc.gridwidth = 5;
-        gbc.insets = new Insets(5,0,5,5);
-
-        add(datePicker, gbc);
+        add(panels[0], gbc);
 
         /****** TIME ******/
+
         final JLabel timeLabel = new JLabel("Time:");
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
-        gbc.insets = new Insets(0,5,5,5);
-        add(timeLabel, gbc);
 
         final JComboBox hourBox = new JComboBox(hours);
         hourBox.setEditable(true);
-        gbc.insets = new Insets(0,5,0,0);
-        gbc.gridx = 1;
         if(calendar.get(Calendar.HOUR) == 0) {
             hourBox.setSelectedItem(12);
         } else {
             hourBox.setSelectedItem(calendar.get(Calendar.HOUR));
         }
-        add(hourBox, gbc);
 
         final JLabel colonLabel = new JLabel(":");
-        gbc.insets = new Insets(0,0,0,0);
-        gbc.gridx = 2;
-        gbc.gridwidth = 2;
-        add(colonLabel, gbc);
 
         final JComboBox minuteBox = new JComboBox(minutes);
         minuteBox.setEditable(true);
-        gbc.insets = new Insets(0,5,0,0);
-        gbc.gridx = 3;
-        gbc.gridwidth = 1;
         if(calendar.get(Calendar.MINUTE) < 10) {
             String minute = "0";
             minute += Integer.toString(calendar.get(Calendar.MINUTE));
@@ -115,46 +104,114 @@ public class NewEntryWindow extends JFrame {
         } else {
             minuteBox.setSelectedItem(calendar.get(Calendar.MINUTE));
         }
-        add(minuteBox, gbc);
 
         final JComboBox pmOrAmBox = new JComboBox(pmOrAm);
-        gbc.insets = new Insets(0,0,0,5);
-        gbc.gridx = 4;
         if(calendar.get(Calendar.AM_PM) == Calendar.AM) {
             pmOrAmBox.setSelectedItem("AM");
         } else {
             pmOrAmBox.setSelectedItem("PM");
         }
-        add(pmOrAmBox, gbc);
 
-        /****** RUN INFO ******/
-        final JLabel distanceLabel = new JLabel("Distance:");
-        gbc.insets = new Insets(0,5,5,5);
+        panels[1].add(hourBox);
+        panels[1].add(colonLabel);
+        panels[1].add(minuteBox);
+        panels[1].add(pmOrAmBox);
+
         gbc.gridx = 0;
-        gbc.gridy = 2;
-        add(distanceLabel, gbc);
-
-        final JTextField distanceTextField = new JTextField();
-        gbc.insets = new Insets(5,5,5,0);
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        add(timeLabel, gbc);
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.gridx = 1;
-        gbc.gridwidth = 2;
-        add(distanceTextField, gbc);
+        add(panels[1], gbc);
 
+        /****** RUN DISTANCE ******/
+
+        final JLabel distanceLabel = new JLabel("Distance:");
+        final JTextField distanceTextField = new JTextField();
+        distanceTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if(((c < '0') || (c > '9')) && (c != '.')
+                        && (c != KeyEvent.VK_BACK_SPACE)) {
+                    e.consume();
+                }
+            }
+        });
+        distanceTextField.setColumns(6);
         final JComboBox distanceUnitsBox = new JComboBox(distanceUnits);
         distanceUnitsBox.setSelectedItem(distanceUnits[0]);
-        gbc.insets = new Insets(5,0,5,0);
-        gbc.gridx = 3;
-        gbc.gridwidth = 3;
-        add(distanceUnitsBox, gbc);
 
-        // TODO: add duration field right here, add submit button, save to file
+        panels[2].add(distanceTextField);
+        panels[2].add(distanceUnitsBox);
 
-        final JLabel titleLabel = new JLabel("Title:");
-        gbc.insets = new Insets(0,5,5,5);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        add(distanceLabel, gbc);
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gbc.gridx = 1;
+        add(panels[2], gbc);
+
+        /****** RUN DURATION ******/
+
+        final JLabel durationLabel = new JLabel("Duration:");
+        final JTextField hoursTextField = new JTextField();
+        hoursTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if(((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+                    e.consume();
+                }
+            }
+        });
+        hoursTextField.setColumns(3);
+        final JLabel hoursLabel = new JLabel("hr");
+        final JTextField minutesTextField = new JTextField();
+        minutesTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if(((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+                    e.consume();
+                }
+            }
+        });
+        minutesTextField.setColumns(3);
+        final JLabel minutesLabel = new JLabel("min");
+        final JTextField secTextField = new JTextField();
+        secTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if(((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+                    e.consume();
+                }
+            }
+        });
+        secTextField.setColumns(3);
+        final JLabel secLabel = new JLabel("sec");
+
+        panels[3].add(hoursTextField);
+        panels[3].add(hoursLabel);
+        panels[3].add(minutesTextField);
+        panels[3].add(minutesLabel);
+        panels[3].add(secTextField);
+        panels[3].add(secLabel);
+
         gbc.gridx = 0;
         gbc.gridy = 3;
-        gbc.gridwidth = 1;
-        add(titleLabel, gbc);
+        gbc.anchor = GridBagConstraints.LINE_END;
+        add(durationLabel, gbc);
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gbc.gridx = 1;
+        add(panels[3], gbc);
+
+        /****** RUN TITLE ******/
+
+        final JLabel titleLabel = new JLabel("Title:");
 
         final JTextArea titleTextArea = new JTextArea();
         titleTextArea.setLineWrap(true);
@@ -162,8 +219,6 @@ public class NewEntryWindow extends JFrame {
         titleTextArea.setRows(2);
         titleTextArea.setColumns(30);
         titleTextArea.setBorder(distanceTextField.getBorder());
-        gbc.gridx = 1;
-        gbc.gridwidth = 4;
         int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
         if(currentHour > 6 && currentHour < 12) {
             titleTextArea.setText("Morning Run");
@@ -172,13 +227,20 @@ public class NewEntryWindow extends JFrame {
         } else {
             titleTextArea.setText("Night Run");
         }
-        add(titleTextArea, gbc);
 
-        final JLabel descriptionLabel = new JLabel("Description:");
+        panels[4].add(titleTextArea);
+
         gbc.gridx = 0;
         gbc.gridy = 4;
-        gbc.gridwidth = 1;
-        add(descriptionLabel, gbc);
+        gbc.anchor = GridBagConstraints.LINE_END;
+        add(titleLabel, gbc);
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gbc.gridx = 1;
+        add(panels[4], gbc);
+
+        /****** RUN DESCRIPTION ******/
+
+        final JLabel descriptionLabel = new JLabel("Description:");
 
         final JTextArea descriptionTextArea = new JTextArea();
         descriptionTextArea.setLineWrap(true);
@@ -186,11 +248,131 @@ public class NewEntryWindow extends JFrame {
         descriptionTextArea.setRows(4);
         descriptionTextArea.setColumns(30);
         descriptionTextArea.setBorder(distanceTextField.getBorder());
+
+        panels[5].add(descriptionTextArea);
+
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        add(descriptionLabel, gbc);
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.gridx = 1;
-        gbc.gridwidth = 4;
-        add(descriptionTextArea, gbc);
+        add(panels[5], gbc);
+
+        /****** RUN TYPE ******/
+
+        final JLabel runTypeLabel = new JLabel("Run Type:");
+
+        final JComboBox runTypeComboBox = new JComboBox(runTypes);
+        runTypeComboBox.setEditable(false);
+        runTypeComboBox.setSelectedItem(runTypes[0]);
+
+        panels[6].add(runTypeComboBox);
+
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        gbc.anchor = GridBagConstraints.LINE_END;
+        add(runTypeLabel, gbc);
+        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gbc.gridx = 1;
+        add(panels[6], gbc);
+
+        /****** SUBMIT BUTTON ******/
+
+        final JButton submitButton = new JButton("Submit");
+        submitButton.setEnabled(false);
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: send data from form in map to other class which will
+                // parse data and save it to a .txt file
+            }
+        });
+
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridwidth = 2;
+        add(submitButton, gbc);
+
+        // used to check if enough fields are filled
+        DocumentListener textAreaListener = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                checkIfFieldEntered(e, submitButton);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                checkIfFieldEmpty(e, submitButton);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+        };
+
+        // used to check that enough fields are filled. also checks to make sure
+        // only numbers are entered
+        DocumentListener textFieldListener = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                checkIfFieldEntered(e, submitButton);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                checkIfFieldEmpty(e, submitButton);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                // unused for text fields
+            }
+        };
+
+        distanceTextField.getDocument().addDocumentListener(textFieldListener);
+        hoursTextField.getDocument().addDocumentListener(textFieldListener);
+        minutesTextField.getDocument().addDocumentListener(textFieldListener);
+        secTextField.getDocument().addDocumentListener(textFieldListener);
+        titleTextArea.getDocument().addDocumentListener(textAreaListener);
 
         pack();
         setLocationRelativeTo(null);
+    }
+
+    private void createPanels(JPanel[] panels, int numOfPanels) {
+        final FlowLayout fl = new FlowLayout();
+        fl.setHgap(2);
+        fl.setVgap(2);
+        fl.setAlignment(FlowLayout.LEADING);
+
+        for(int i = 0; i < numOfPanels; i++) {
+            panels[i] = new JPanel();
+            panels[i].setLayout(fl);
+        }
+    }
+
+    private void checkIfFieldEntered(DocumentEvent e, JButton button) {
+        int len = e.getDocument().getLength();
+        if(len == 1) {
+            numOfEnteredFields++;
+        }
+
+        if(numOfEnteredFields == 5) {
+            button.setEnabled(true);
+        }
+    }
+
+    private void checkIfFieldEmpty(DocumentEvent e, JButton button) {
+        int len = e.getDocument().getLength();
+        if(len == 0) {
+            numOfEnteredFields--;
+        }
+
+        if(numOfEnteredFields < 5) {
+            button.setEnabled(false);
+        }
     }
 }
