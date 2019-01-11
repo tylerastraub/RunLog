@@ -2,6 +2,7 @@ package com.straub.runlog.data;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Map;
 
 public class FileIO {
 
@@ -88,7 +89,22 @@ public class FileIO {
         try {
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(text);
+            bw.write(text + "\n");
+            bw.close();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeToFile(String filePath, HashMap<String, String> values) {
+        File file = new File(filePath);
+
+        try {
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            for(Map.Entry<String, String> entry : values.entrySet()) {
+                bw.write(entry.getKey() + entry.getValue() + "\n");
+            }
             bw.close();
         } catch(IOException e) {
             e.printStackTrace();

@@ -7,8 +7,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Properties;
 
+import com.straub.runlog.data.EntryParser;
 import com.straub.runlog.tools.DateLabelFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -284,8 +286,32 @@ public class NewEntryWindow extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: send data from form in map to other class which will
-                // parse data and save it to a .txt file
+                // this could be much more tidy by putting it in own method, but
+                // that would mean redoing how every component is kept track of
+                HashMap<String, String> entryData = new HashMap<>();
+                entryData.put("DATE:",
+                        datePicker.getJFormattedTextField().getText());
+                String time = "";
+                time += hourBox.getSelectedItem().toString();
+                time += "-";
+                time += minuteBox.getSelectedItem().toString();
+                time += "-";
+                time += pmOrAmBox.getSelectedItem().toString();
+                entryData.put("TIME:", time);
+                entryData.put("DISTANCE:", distanceTextField.getText()
+                        + distanceUnitsBox.getSelectedItem().toString());
+                // duration is stored as hours-minutes-seconds rather than just
+                // an int of seconds
+                entryData.put("DURATION:", hoursTextField.getText() + "-"
+                        + minutesTextField.getText() + "-"
+                        + secTextField.getText());
+                entryData.put("TITLE:", titleTextArea.getText());
+                entryData.put("DESCRIPTION:", descriptionTextArea.getText());
+                entryData.put("RUNTYPE:",
+                        runTypeComboBox.getSelectedItem().toString());
+
+                EntryParser entryParser = new EntryParser(entryData);
+                closeWindow();
             }
         });
 
@@ -374,5 +400,9 @@ public class NewEntryWindow extends JFrame {
         if(numOfEnteredFields < 5) {
             button.setEnabled(false);
         }
+    }
+
+    private void closeWindow() {
+        dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 }
