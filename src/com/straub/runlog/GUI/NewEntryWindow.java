@@ -11,17 +11,21 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import com.straub.runlog.data.EntryParser;
+import com.straub.runlog.data.RunData;
 import com.straub.runlog.tools.DateLabelFormatter;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
-public class NewEntryWindow extends JFrame {
+public class NewEntryWindow extends JDialog {
     // numOfEnteredFields starts equal to number of fields with default values
     private int numOfEnteredFields = 1;
 
-    public NewEntryWindow() {
-        super("Add New Entry");
+    public NewEntryWindow(JLabel howFarLabel, HashMap<String, String> userInfo) {
+        //super(frame, "Add New Entry");
+        setAlwaysOnTop(true);
+        setTitle("Add New Entry");
+        setModalityType(ModalityType.APPLICATION_MODAL);
 
         Calendar calendar = GregorianCalendar.getInstance();
 
@@ -48,7 +52,7 @@ public class NewEntryWindow extends JFrame {
         minutes[0] = "00";
         minutes[1] = "05";
         String[] pmOrAm = {"AM", "PM"};
-        String[] distanceUnits = {"Miles", "Kilometers", "Feet", "Meters"};
+        String[] distanceUnits = {"miles", "kilometers", "feet", "meters"};
         String[] runTypes = {"Run", "Long Run", "Workout", "Race"};
 
         addWindowListener(new WindowAdapter() {
@@ -298,19 +302,23 @@ public class NewEntryWindow extends JFrame {
                 time += "-";
                 time += pmOrAmBox.getSelectedItem().toString();
                 entryData.put("TIME:", time);
-                entryData.put("DISTANCE:", distanceTextField.getText()
-                        + distanceUnitsBox.getSelectedItem().toString());
-                // duration is stored as hours-minutes-seconds rather than just
-                // an int of seconds
-                entryData.put("DURATION:", hoursTextField.getText() + "-"
-                        + minutesTextField.getText() + "-"
-                        + secTextField.getText());
+                entryData.put("DISTANCE:", distanceTextField.getText());
+                entryData.put("DISTANCEUNITS:",
+                        distanceUnitsBox.getSelectedItem().toString());
+                // duration is stored in seconds
+                int hrs = Integer.parseInt(hoursTextField.getText()) * 3600;
+                int min = Integer.parseInt(minutesTextField.getText()) * 60;
+                int sec = Integer.parseInt(secTextField.getText());
+
+                entryData.put("DURATION:", Integer.toString(hrs + min + sec));
                 entryData.put("TITLE:", titleTextArea.getText());
                 entryData.put("DESCRIPTION:", descriptionTextArea.getText());
                 entryData.put("RUNTYPE:",
                         runTypeComboBox.getSelectedItem().toString());
 
                 EntryParser entryParser = new EntryParser(entryData);
+                howFarLabel.setText(String.format("%.2f", new RunData().getWeeklyDistance())
+                        + " "  + userInfo.get("PREFERREDUNITS"));
                 closeWindow();
             }
         });

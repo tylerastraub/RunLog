@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.HashMap;
 
 public class FirstTimeWindow extends JFrame{
     public FirstTimeWindow(String title, String version) {
@@ -81,8 +82,10 @@ public class FirstTimeWindow extends JFrame{
 
     private void createDataFile(String user_name) {
         FileIO fileIO = new FileIO();
+        HashMap<String, String> userData = new HashMap<>();
+        userData.put("USER_NAME:", user_name);
+        userData.put("PREFERREDUNITS:", "miles");
 
-        fileIO.writeToFile("res/data.txt", "USER_NAME:"
-                + user_name);
+        fileIO.writeToFile("res/data.txt", userData);
     }
 }

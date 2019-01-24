@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         //final String text = args[0]; // use this for command line args
         String title = "RunLog";
-        String version = "0.0.1";
+        String version = "0.0.2";
 
         FileIO fileReader = new FileIO();
 
@@ -22,7 +22,6 @@ public class Main {
                     final FirstTimeWindow firstTimeWindow = new FirstTimeWindow(title, version);
                     firstTimeWindow.setVisible(true);
                 } else {
-                    System.out.println(data);
                     final HomeWindow homeWindow = new HomeWindow(title, version);
                     homeWindow.setVisible(true);
                 }
