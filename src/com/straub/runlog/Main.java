@@ -1,8 +1,12 @@
+// RunLog is a local application that allows users to record their runs and keep
+// track of their training over an extended period of time.
+//
+// Written by Tyler Straub.
+
 package com.straub.runlog;
 
-import com.straub.runlog.GUI.FirstTimeWindow;
-import com.straub.runlog.GUI.HomeWindow;
 import com.straub.runlog.data.FileIO;
+import com.straub.runlog.home.HomeWindow;
 
 import javax.swing.*;
 
@@ -10,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         //final String text = args[0]; // use this for command line args
         String title = "RunLog";
-        String version = "0.0.2";
+        String version = "0.0.5";
 
         FileIO fileReader = new FileIO();
 

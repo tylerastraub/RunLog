@@ -1,3 +1,7 @@
+// Creates an object that handles the loading of all the run data from the
+// locally saved run files. Can also fetch the distance ran since Monday of the
+// current week.
+
 package com.straub.runlog.data;
 
 import java.io.File;
@@ -7,13 +11,14 @@ import java.util.HashMap;
 
 public class RunData {
     public void loadRunData(HashMap<String, HashMap<String, String>> hashMap) {
+        hashMap.clear(); // get a fresh plate for the HashMap
         File folder = new File("runs/");
         File[] allRunFiles = folder.listFiles();
         FileIO fileIO = new FileIO();
 
         try {
             for(int i = 0; i < allRunFiles.length; i++) {
-                if(allRunFiles[i].isFile()) {
+                if(allRunFiles[i].isFile() && isTextFile(allRunFiles[i])) {
                     hashMap.put("runs/" + allRunFiles[i].getName() + ".txt",
                             fileIO.createHashMapFromFile(allRunFiles[i].getPath(),
                                     ":"));
@@ -24,6 +29,11 @@ public class RunData {
         } catch(NullPointerException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean isTextFile(File file) {
+        String name = file.getName();
+        return name.substring(name.lastIndexOf('.')).equals(".txt");
     }
 
     public double getWeeklyDistance() {

@@ -1,8 +1,14 @@
-package com.straub.runlog.GUI;
+// The main window that holds the JTabbedPane and displays essentially all
+// content.
+
+package com.straub.runlog.home;
 
 import com.straub.runlog.data.FileIO;
+import com.straub.runlog.log.LogTab;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -12,6 +18,7 @@ public class HomeWindow extends JFrame {
     public HomeWindow(String title, String version){
         super(title + " " + version);
 
+
         HashMap<String, String> userInfo = new HashMap<String, String>();
         readUserInfo(userInfo);
 
@@ -19,6 +26,7 @@ public class HomeWindow extends JFrame {
         setResizable(true); // this is the default value anyways
         setLayout(new GridLayout(1, 1));
         setPreferredSize(new Dimension(800, 600));
+        setMinimumSize(new Dimension(800, 600));
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -28,11 +36,23 @@ public class HomeWindow extends JFrame {
             }
         });
 
-        HomeTab homeTab = new HomeTab(userInfo);
+        LogTab logTab = new LogTab();
+        HomeTab homeTab = new HomeTab(userInfo, logTab);
 
         final JTabbedPane tabs = new JTabbedPane(JTabbedPane.LEFT);
+        tabs.add("Log", logTab);
         tabs.add("Home", homeTab);
+        tabs.setSelectedComponent(homeTab);
         add(tabs);
+
+        tabs.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if(tabs.getSelectedComponent() == logTab) {
+                    logTab.update();
+                }
+            }
+        });
 
         pack();
         // this needs to be at end so that it can center after components are
@@ -52,6 +72,5 @@ public class HomeWindow extends JFrame {
     }
 }
 
-// TODO: general idea is that there will be a calendar, a weekly logger, a stats
-// page, and some other stuff. home page should have all the tabs, a welcome
-// message, and a brief weekly stats recap
+// TODO: create log tab, calendar tab, and stats tab. add weekly minutes to
+// weekly summary on home tab

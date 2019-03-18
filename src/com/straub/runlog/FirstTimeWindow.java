@@ -1,6 +1,12 @@
-package com.straub.runlog.GUI;
+// JFrame that is launched on first time and prompts the user for their name.
+// Eventually, this will be a little more comprehensive and ask for a few more
+// settings, but until RunLog is approaching alpha, not much reason to work on
+// customization before just basic functionality.
+
+package com.straub.runlog;
 
 import com.straub.runlog.data.FileIO;
+import com.straub.runlog.home.HomeWindow;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -89,3 +95,5 @@ public class FirstTimeWindow extends JFrame{
         fileIO.writeToFile("res/data.txt", userData);
     }
 }
+
+// TODO: add option to select default distance units (miles or kilometers)

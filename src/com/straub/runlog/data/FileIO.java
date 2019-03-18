@@ -1,3 +1,5 @@
+// Class to make file input/output easier.
+
 package com.straub.runlog.data;
 
 import java.io.*;
@@ -5,11 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FileIO {
-
-    public FileIO() {
-
-    }
-
     public String readFile(String filePath){
         File f = new File(filePath);
         if (!f.isFile()) {

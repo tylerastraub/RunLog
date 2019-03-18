@@ -1,10 +1,12 @@
+// Class to convert the date field from NewEntryWindow.java to a string (or
+// vice versa if ever needed).
+
 package com.straub.runlog.tools;
 
+import javax.swing.JFormattedTextField.AbstractFormatter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import javax.swing.JFormattedTextField.AbstractFormatter;
 
 public class DateLabelFormatter extends AbstractFormatter {
 

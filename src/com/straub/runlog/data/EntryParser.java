@@ -16,6 +16,6 @@ public class EntryParser {
         String dateAndTime = entryData.get("DATE:") + entryData.get("TIME:");
         int hash = hashGenerator.createHash(dateAndTime);
 
-        fileIO.writeToFile("runs/" + hash, entryData);
+        fileIO.writeToFile("runs/" + hash + ".txt", entryData);
     }
 }

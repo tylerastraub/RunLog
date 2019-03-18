@@ -1,4 +1,13 @@
-package com.straub.runlog.GUI;
+// Popup JDialog for entering a new run into the log.
+
+package com.straub.runlog.home;
+
+import com.straub.runlog.data.EntryParser;
+import com.straub.runlog.data.RunData;
+import com.straub.runlog.tools.DateLabelFormatter;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -9,13 +18,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Properties;
-
-import com.straub.runlog.data.EntryParser;
-import com.straub.runlog.data.RunData;
-import com.straub.runlog.tools.DateLabelFormatter;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
 
 public class NewEntryWindow extends JDialog {
     // numOfEnteredFields starts equal to number of fields with default values
@@ -316,7 +318,7 @@ public class NewEntryWindow extends JDialog {
                 entryData.put("RUNTYPE:",
                         runTypeComboBox.getSelectedItem().toString());
 
-                EntryParser entryParser = new EntryParser(entryData);
+                new EntryParser(entryData);
                 howFarLabel.setText(String.format("%.2f", new RunData().getWeeklyDistance())
                         + " "  + userInfo.get("PREFERREDUNITS"));
                 closeWindow();

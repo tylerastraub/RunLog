@@ -1,7 +1,10 @@
-package com.straub.runlog.GUI;
+// Actual component for the home tab. Displays a welcome message as well as a
+// brief summary of weekly mileage and the "Add New Entry" button.
 
-import com.straub.runlog.data.FileIO;
+package com.straub.runlog.home;
+
 import com.straub.runlog.data.RunData;
+import com.straub.runlog.log.LogTab;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +17,7 @@ import static java.awt.Font.PLAIN;
 public class HomeTab extends JComponent {
     private RunData runData = new RunData();
 
-    public HomeTab(HashMap<String, String> userInfo) {
+    public HomeTab(HashMap<String, String> userInfo, LogTab logTab) {
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -68,7 +71,8 @@ public class HomeTab extends JComponent {
             public void actionPerformed(ActionEvent e) {
                 // pass label as argument so that after new entry is added, we
                 // can check for the new file and update the home screen
-                final NewEntryWindow newEntryWindow = new NewEntryWindow(weeklyDistanceLabel, userInfo);
+                final NewEntryWindow newEntryWindow =
+                        new NewEntryWindow(weeklyDistanceLabel, userInfo);
                 newEntryWindow.setVisible(true);
             }
         });
